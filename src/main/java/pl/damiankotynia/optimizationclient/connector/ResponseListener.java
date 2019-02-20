@@ -3,6 +3,7 @@ package pl.damiankotynia.optimizationclient.connector;
 
 import pl.damiankotynia.model.ChartGeneratorResponse;
 import pl.damiankotynia.model.Response;
+import pl.damiankotynia.optimizationclient.view.ChartView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,10 +17,12 @@ import static pl.damiankotynia.optimizationclient.service.Utils.INBOUND_CONNECTI
 public class ResponseListener implements Runnable {
     private ObjectInputStream inputStream;
     private boolean isRunning;
+    private ChartView chartView;
 
     public ResponseListener(ObjectInputStream inputStream) {
         this.inputStream = inputStream;
         this.isRunning = true;
+        this.chartView = new ChartView();
     }
 
     @Override
@@ -36,16 +39,18 @@ public class ResponseListener implements Runnable {
                 ChartGeneratorResponse qwe = (ChartGeneratorResponse)responseObject;
 
                 BufferedImage image = qwe.getImage();
-                JLabel picLabel = new JLabel(new ImageIcon(image));
+
+                /*JLabel picLabel = new JLabel(new ImageIcon(image));
 
                 JPanel jPanel = new JPanel();
-                jPanel.add(picLabel);
+               // jPanel.add(picLabel);
                 JFrame f = new JFrame();
 
                 f.setSize(new Dimension(image.getWidth(), image.getHeight()));
                 f.add(jPanel);
-                f.setVisible(true);
+                f.setVisible(true);*/
 
+                chartView.showImage(image);
                 System.out.println(INBOUND_CONNECTION_LOGGER + " recieved object ");
 
             } catch (IOException e) {
