@@ -31,7 +31,7 @@ public class Cli {
     }
 
 
-    public static void printInteria(){
+    public static void printEnterInteria(){
         System.out.println("Podaj parametr bezwladnosci: \n");
     }
 
@@ -45,9 +45,15 @@ public class Cli {
         System.out.println("Podaj parametr F: \n");
     }
 
+    public static void  printEnterFunction(){
+        System.out.println("Podaj funkcję do optymalizacji: \n");
+    }
+
+
     public static void printMessage(String message){
         System.out.println(message);
     }
+
     public static void clearDisplay(){
         System.out.flush();
     }

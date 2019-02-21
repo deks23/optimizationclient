@@ -13,7 +13,7 @@ public class OutboundConnection {
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
     private boolean isRunning;
-
+    private ResponseListener responseListener;
     /**
      * Constructor for OutboundConnection class
      * @param port output connection port
@@ -26,10 +26,8 @@ public class OutboundConnection {
         outputStream = new ObjectOutputStream(socket.getOutputStream());
         inputStream = new ObjectInputStream(socket.getInputStream());
         this.isRunning = true;
-    }
-
-    public void run() {
-        new Thread(new ResponseListener(inputStream)).start();
+        this.responseListener = new ResponseListener(inputStream);
+        new Thread(responseListener).start();
     }
 
     /**
@@ -52,6 +50,21 @@ public class OutboundConnection {
             return false;
         }
         return true;
+    }
+
+    public ResponseListener getResponseListener() {
+        return responseListener;
+    }
+
+    public void kill(){
+        responseListener.kill();
+        try {
+            inputStream.close();
+            outputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

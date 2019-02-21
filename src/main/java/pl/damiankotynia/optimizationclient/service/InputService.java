@@ -2,6 +2,8 @@ package pl.damiankotynia.optimizationclient.service;
 
 
 
+import org.mariuszgromada.math.mxparser.Function;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -82,6 +84,21 @@ public class InputService {
         return returnValue;
     }
 
+    public double getDouble(){
+        boolean isCorrect = false;
+        double returnValue = 0;
+        while(!isCorrect){
+            String value = input.nextLine();
+            try{
+                returnValue = Double.parseDouble(value);
+                isCorrect = true;
+            }catch (NumberFormatException e){
+                System.out.println("Podana wartosc jest niepoprawna");
+            }
+        }
+        return returnValue;
+    }
+
     public int getIndex(int max){
         boolean isCorrect = false;
         int returnValue = 0;
@@ -91,6 +108,20 @@ public class InputService {
                 isCorrect = !isCorrect;
             else
                 System.out.println("Wartość minimalna wartość to 0 a maksymalna to " + max);
+        }
+        return returnValue;
+    }
+
+    public String getFunctionString(){
+        boolean isCorrect = false;
+        String returnValue = null;
+        while(!isCorrect){
+            returnValue = getString();
+            Function function = new Function(returnValue);
+            if(function.checkSyntax())
+                isCorrect = true;
+            else
+                System.out.println("Podano niepoprawna funkcje");
         }
         return returnValue;
     }
