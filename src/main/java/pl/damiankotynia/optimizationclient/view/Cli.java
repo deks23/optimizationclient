@@ -54,6 +54,10 @@ public class Cli {
         System.out.println(message);
     }
 
+    public static void printEnterIterations(){
+        System.out.println("Podaj liczbe iteracji: \n");
+    }
+
     public static void clearDisplay(){
         System.out.flush();
     }

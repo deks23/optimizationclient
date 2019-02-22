@@ -20,7 +20,8 @@ public class Main {
         try {
             outboundConnection = new OutboundConnection(4444, "localhost");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Nie można połączyć z serwerem. Kończę działanie");
+            exit = true;
         }
 
 
@@ -71,7 +72,7 @@ public class Main {
 
     private static void insertRequestCommonData(InputService inputService, Request req) {
         Cli.printOptimizationType();
-        if(inputService.getMainMenuInput(2)==1)
+        if(inputService.getMainMenuInput(3)==1)
             req.setOptimizationType(OptimizationType.PARTACLE_SWARM);
         else
             req.setOptimizationType(OptimizationType.DIFFERENTIAL_EVOLUTION);
@@ -85,5 +86,11 @@ public class Main {
         req.setParticleAmmount(inputService.getInteger());
         Cli.printEnterFunction();
         req.setFunction(inputService.getFunctionString());
+        Cli.printEnterIterations();
+        req.setIterations(inputService.getInteger(1000));
+    }
+
+    public static void setWait(boolean value){
+        wait = value;
     }
 }

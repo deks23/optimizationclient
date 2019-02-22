@@ -11,6 +11,7 @@ public class Request implements Serializable {
     private double interia;
     private double c1;
     private double c2;
+    private int iterations;
 
 
     public Request() {
@@ -73,6 +74,14 @@ public class Request implements Serializable {
 
     public void setC2(double c2) {
         this.c2 = c2;
+    }
+
+    public int getIterations() {
+        return iterations;
+    }
+
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
     }
 
     @Override

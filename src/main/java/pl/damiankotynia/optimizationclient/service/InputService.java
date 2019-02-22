@@ -84,6 +84,23 @@ public class InputService {
         return returnValue;
     }
 
+
+    public int getInteger(int max){
+        boolean isCorrect = false;
+        int returnValue = 0;
+        while(!isCorrect){
+            String value = input.nextLine();
+            try{
+                returnValue = Integer.parseInt(value);
+                if(returnValue <= max)
+                    isCorrect = true;
+            }catch (NumberFormatException e){
+                System.out.println("Podana wartosc jest niepoprawna");
+            }
+        }
+        return returnValue;
+    }
+
     public double getDouble(){
         boolean isCorrect = false;
         double returnValue = 0;

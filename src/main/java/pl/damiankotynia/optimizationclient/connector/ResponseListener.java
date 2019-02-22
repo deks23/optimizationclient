@@ -4,6 +4,7 @@ package pl.damiankotynia.optimizationclient.connector;
 import pl.damiankotynia.model.ChartGeneratorResponse;
 import pl.damiankotynia.model.Response;
 import pl.damiankotynia.model.ResponseType;
+import pl.damiankotynia.optimizationclient.Main;
 import pl.damiankotynia.optimizationclient.view.ChartView;
 import pl.damiankotynia.optimizationclient.view.Cli;
 
@@ -43,6 +44,7 @@ public class ResponseListener implements Runnable {
                 if(!isEmpty(responseObject.getMessage()) && responseObject.getResponseType().equals(ResponseType.FINISHED)){
                     Cli.printMessage(responseObject.getMessage());
                     Cli.clearDisplay();
+                    Main.setWait(false);
                     Cli.printMainMenu();
                 }
 
